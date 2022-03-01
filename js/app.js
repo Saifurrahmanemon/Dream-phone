@@ -85,7 +85,7 @@ const showMobileDetails = (details) => {
     getMobileDetailsDiv.textContent = "";
     const showMobileDetail = document.createElement("div");
 
-    //adding class to showMobileDetail card
+    //adding class style to showMobileDetail card
     showMobileDetail.classList.add(
         "card",
         "my-3",
