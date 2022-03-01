@@ -1,3 +1,4 @@
+//this is for fetching Api
 const getMobileResult = async () => {
     const inputResult = document.getElementById("mobile-search-input");
     const inputResultText = inputResult.value.toLowerCase();
@@ -13,6 +14,7 @@ const getMobileResult = async () => {
     } catch (error) {
         console.log(error);
     }
+    //resetting input field
     inputResult.value = "";
 };
 
@@ -21,17 +23,18 @@ const showMobileResult = (mobiles) => {
     const showAllMobiles = document.getElementById("show-all-mobiles");
     const errorText = document.getElementById("no-result-found");
     const getMobileDetailsDiv = document.getElementById("mobile-details");
-    // this will show first 20 mobiles if available
-    const displayMobiles = mobiles.slice(0, 20);
-    // for resetting result and details view
-    showAllMobiles.textContent = "";
-    getMobileDetailsDiv.textContent = "";
-    // show error massage when input is not valid
+    // show error massage if no result found
     if (mobiles.length == 0) {
         errorText.style.display = "block";
         //hide loader
         toggleLoader("none");
     }
+    // this will show first 20 mobiles if available
+    const displayMobiles = mobiles.slice(0, 20);
+
+    // for resetting result and details view
+    showAllMobiles.textContent = "";
+    getMobileDetailsDiv.textContent = "";
 
     displayMobiles?.forEach((mobile) => {
         errorText.style.display = "none";
@@ -40,7 +43,7 @@ const showMobileResult = (mobiles) => {
         const showSingleMobile = document.createElement("div");
         showSingleMobile.classList.add("col");
         showSingleMobile.innerHTML = `
-             <div  class="card h-100 shadow pt-2 mb-5 bg-white rounded">
+             <div  class=" card h-100 shadow pt-2 mb-5 bg-white rounded">
                     <img src="${image}" class="card-img-top w-75 mx-auto"  alt="..." />
                     <div class="card-body">
                         <h5 class="card-title">${phone_name}</h5>
@@ -50,6 +53,7 @@ const showMobileResult = (mobiles) => {
                 </div>
         `;
         showAllMobiles.appendChild(showSingleMobile);
+
         // hide Loader
         toggleLoader("none");
     });
@@ -68,16 +72,18 @@ const getMobileDetails = async (mobileId) => {
 
 // for showing specific mobile details
 const showMobileDetails = (details) => {
-    const getMobileDetailsDiv = document.getElementById("mobile-details");
-    getMobileDetailsDiv.textContent = "";
-
-    const showMobileDetail = document.createElement("div");
+    //destructuring elements
     const {
         name,
         image,
         releaseDate,
+        brand,
         mainFeatures: { storage, displaySize, chipSet, memory, sensors },
     } = details;
+
+    const getMobileDetailsDiv = document.getElementById("mobile-details");
+    getMobileDetailsDiv.textContent = "";
+    const showMobileDetail = document.createElement("div");
 
     //adding class to showMobileDetail card
     showMobileDetail.classList.add(
@@ -92,10 +98,13 @@ const showMobileDetails = (details) => {
     showMobileDetail.innerHTML = `
     <img class="card-img-top w-50 mx-auto pt-2" src="${image}" alt="Card image cap">
      <div class="card-body">
-       <h3 class="card-title text-center">Name: ${name}</h3>
-       <h6 class="card-title text-center"> Release Date: ${
-           releaseDate ? releaseDate : "No release date found"
-       }</h6>
+       <div class="card-title ">
+        <h3>${name}</h3>
+        <h5> ${brand}</h5>
+        <h6 class="text-muted" > Release Date: ${
+            releaseDate ? releaseDate : "No release date found"
+        }</h6>
+       </div>
        <h4 class="my-3">Main Features:</h4>
         <div class ="text-feature">
         <p><span>Storage:</span> ${storage}</p>
@@ -105,7 +114,11 @@ const showMobileDetails = (details) => {
         </div>
         <div>
         <h4 class="mt-2">Sensors: </h4>
-        ${sensors?.map((item) => `<p class='text-feature' >${item}</p>`)}
+        ${sensors
+            ?.map((item) => {
+                return `<p class='text-feature'>${item},</p> `;
+            })
+            .join("")}
         </div>
         <div>
         <h4>Others: </h4>

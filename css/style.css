@@ -1,7 +1,6 @@
 h1 {
     font-family: "Pacifico", cursive;
     display: inline-block;
-    /* text-align: center; */
 }
 
 h1::after {
