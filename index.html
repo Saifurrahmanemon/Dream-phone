@@ -22,7 +22,7 @@
         />
         <title>Dream Mobile</title>
     </head>
-    <body>
+    <body class="container">
         <header>
             <div class="text-center my-4 text-dark">
                 <h1>Dream Mobile</h1>
@@ -31,9 +31,9 @@
         <main>
             <!-- search area  -->
             <section>
-                <div class="mx-auto mt-4 input-group mb-3 w-50">
+                <div class="mx-auto mt-4 input-group mb-4 w-50">
                     <input
-                        id="search-field"
+                        id="mobile-search-input"
                         type="text"
                         class="form-control"
                         placeholder="search your favorite phone"
@@ -43,11 +43,21 @@
                     <button
                         class="btn btn-outline-secondary"
                         type="button"
-                        id="button-search"
+                        id="mobile-search-button"
+                        onclick="getMobileResult()"
                     >
                         Search
                     </button>
                 </div>
+            </section>
+            <!-- single mobile details  -->
+            <div id="mobile-details"></div>
+            <!-- mobile search result section  -->
+            <section>
+                <div
+                    id="show-all-mobiles"
+                    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"
+                ></div>
             </section>
         </main>
     </body>
