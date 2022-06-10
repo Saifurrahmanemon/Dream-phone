@@ -1,3 +1,3 @@
 # Dream-phone
 
-## Built the app using vanilla JS and CSS
+## Built a app simple for searching specific information about mobile devices by fetching API using vanilla JS and used Raw CSS for styling.
